@@ -1,25 +1,22 @@
-let listaCheckbox = document.querySelectorAll("input[type='checkbox']");
-
-//TO-DO: Refatorar rotina de validação de pontos para cada checkbox
-listaCheckbox.forEach(function(checkbox){   
+document.querySelectorAll("input[type='checkbox']").forEach(function(checkbox){   
     checkbox.addEventListener("click", function(){
-        let novaPontuacao;
-        
+        let pontuacaoIncremento
+        let listaCheckboxAtualSelecionados = this.parentNode.querySelectorAll("input[type='checkbox']:checked");
+        let pontuacaoAtual = listaCheckboxAtualSelecionados.length + (this.checked ? - 1 : 1);
+
         //Verifica a nova pontuação que será atribuída
-        if (!this.checked && this.value == pontuacaoAtributos.getPontos())
-            novaPontuacao = - 1;
+        if (!this.checked && this.value == pontuacaoAtual)
+            pontuacaoIncremento = - 1;
         else
-            novaPontuacao = this.value - pontuacaoAtributos.getPontos();
+            pontuacaoIncremento = this.value - pontuacaoAtual;
 
+        let pontuacaoNova = pontuacaoAtual + pontuacaoIncremento;
+        
         //Se a nova pontuação for válida, preenche os pontos na página
-        if (pontuacaoAtributos.adicionarPontos(novaPontuacao)){
+        if (pontuacaoAtributos.adicionarPontos(pontuacaoIncremento)){
             let listaCheckboxAtual = this.parentNode.querySelectorAll("input[type='checkbox']");
-            
-            listaCheckboxAtual.forEach(checkbox => {
-                checkbox.checked = (checkbox.value <= pontuacaoAtributos.getPontos());
-            });
-
-            verificarPontosAdicionais(this.parentNode.id, (pontuacaoAtributos.getPontos() == listaCheckboxAtual.length));
+            listaCheckboxAtual.forEach(checkbox => checkbox.checked = (checkbox.value <= pontuacaoNova));
+            verificarPontosAdicionais(this.parentNode.id, (pontuacaoNova == listaCheckboxAtual.length));
         }
         else{
             this.checked = !this.checked;
