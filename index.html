@@ -1,240 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Ficha de RPG</title>
-		<link rel="icon" href="img/rupee.png" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="css/reset.css">
-		<link rel="stylesheet" type="text/css" href="css/index.css">
-			
-	</head>
-	<body>
 
-		<header>
-			<div class="container"></div>
-		</header>
-		
-		<section class="container">						
-			<form action="server/form.php" method="post" id="form-adiciona">
-				<div class="grupo-info">
-					<input type="submit" value="OK"/>
-					<input type="image" id="limpaForm" src="img/rewind.png" value=""/>
-					<h2 id="titulo-form">Ficha</h2>			
-					<audio id="myAudio">
-						<source src="audio/chestopen.mp3" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>					
-					<button class="accordion" disabled>Complete a ficha e descubra o perfil do seu personagem.</button>
-					<div class="panel">
-						<figcaption id="desc_perfil" class="invisivel fadeOut"></figcaption>
-						<img id="perfil" class="invisivel fadeOut" src=""/>										
-					</div>									
-				</div>	
-				<div class="grupo-info">
-							<div class="titulo-sessao">
-								<h2>Dados gerais</h2>
-							</div>
-							<div class="geral">
-								<div class="info-geral">
-									<label for="nome">Nome</label>
-									<input id="nome" name="nome" type="text" placeholder="Nome do personagem" class="campo campo-medio"/>
-								</div>
-								<div class="info-geral">
-									<label for="sexo">Sexo</label>
-									<select id="sexo" name="sexo" class="campo campo-medio">
-										<option value="" selected>--</option>
-										<option value="F">Feminino</option>
-										<option value="M">Masculino</option>
-										<option value="O">Sei lá</option>
-									</select>
-								</div>
-							</div>
-							<div class="geral">
-								<div class="info-geral">
-									<label for="nascimento">Nascimento</label>
-									<input id="nascimento" name="nascimento" type="date" placeholder="Data de nascimento do personagem" class="campo campo-medio"/>
-								</div>
-								<div class="info-geral">
-									<label for="comportamento">Comportamento</label>
-									<select id="comportamento" name="comportamento" class="campo campo-medio">
-										<option value="" selected>--</option>
-										<option value="lawful">Lícito</option>
-										<option value="neutral">Neutro</option>
-										<option value="chaotic">Caótico</option>
-									</select>
-								</div>
-							</div>
-							<div class="geral">
-								<div class="info-geral">
-									<label for="indole">Índole</label>
-									<select id="indole" name="indole" class="campo campo-medio">
-										<option value="" selected>--</option>
-										<option value="good">Boa</option>
-										<option value="neutral">Neutra</option>
-										<option value="evil">Má</option>
-									</select>
-								</div>
-								<div class="info-geral">
-									<label for="hobby">Hobby</label>
-									<select id="hobby" name="hobby" class="campo campo-medio">
-										<option value="" selected>--</option>
-										<option value="jogos">Jogos</option>
-										<option value="comida">Comida</option>
-										<option value="leitura">Leitura</option>
-									</select>
-								</div>
-							</div>																					
-				</div>
-				<div class="grupo-info">
-						<div class="titulo-sessao">							
-							<h2>Atributos</h2>
-							<div>
-								<label for="pontosDisponiveis">Pontos disponíveis</label>
-								<input id="pontosDisponiveis" class="campo-redondo-medio" type="text" readonly/>
-								<label id="avisoPontuacao" class="fadeOut" for="pontosDisponiveis"></label>
-							</div>							
-						</div>											
-						<div class="categoria">
-							<div class="titulo-categoria">
-								<h2>Físicos</h2>
-							</div>							
-							<div id="forca" class="info-categoria">
-								<label for="forca">Força</label>
-								<input type="checkbox" name="forca"/>
-								<input type="checkbox" name="forca"/>
-								<input type="checkbox" name="forca"/>
-								<input type="checkbox" name="forca"/>
-								<input type="checkbox" name="forca"/>
-								<div class="info-adicional invisivel fadeOut">										
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="forcaadicional" placeholder="+0" value="0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>									
-								</div>																									
-							</div>
-							<div id="destreza" class="info-categoria">
-								<label for="destreza">Destreza</label>
-								<input type="checkbox" name="destreza"/>
-								<input type="checkbox" name="destreza"/>
-								<input type="checkbox" name="destreza"/>
-								<input type="checkbox" name="destreza"/>
-								<input type="checkbox" name="destreza"/>									
-								<div class="info-adicional invisivel fadeOut">										
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="destrezaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>										
-								</div>							
-							</div>
-							<div id="vigor" class="info-categoria">
-								<label for="vigor">Vigor</label>
-								<input type="checkbox" name="vigor"/>
-								<input type="checkbox" name="vigor"/>
-								<input type="checkbox" name="vigor"/>
-								<input type="checkbox" name="vigor"/>
-								<input type="checkbox" name="vigor"/>																			
-								<div class="info-adicional invisivel fadeOut">																							
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="vigoradicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-								</div>																	
-							</div>
-						</div>
-						<div class="categoria">
-							<div class="titulo-categoria">
-								<h2>Sociais</h2>
-							</div>							
-							<div id="carisma" class="info-categoria">
-									<label for="carisma">Carisma</label>									
-									<input type="checkbox" name="carisma"/>
-									<input type="checkbox" name="carisma"/>
-									<input type="checkbox" name="carisma"/>
-									<input type="checkbox" name="carisma"/>
-									<input type="checkbox" name="carisma"/>																		
-									<div class="info-adicional invisivel fadeOut">																							
-										<button class="botao remover-atributo">-</button>
-										<input type="text" name="carismaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-										<button class="botao adicionar-atributo">+</button>																							
-									</div>																											
-							</div>
-							<div id="manipulacao" class="info-categoria">
-								<label for="manipulacao">Manipulação</label>									
-								<input type="checkbox" name="manipulacao"/>
-								<input type="checkbox" name="manipulacao"/>
-								<input type="checkbox" name="manipulacao"/>
-								<input type="checkbox" name="manipulacao"/>
-								<input type="checkbox" name="manipulacao"/>																			
-								<div class="info-adicional invisivel fadeOut">																						
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="manipulacaoadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-							    </div>																											
-							</div>
-							<div id="aparencia" class="info-categoria">
-								<label for="aparencia">Aparência</label>									
-								<input type="checkbox" name="aparencia"/>
-								<input type="checkbox" name="aparencia"/>
-								<input type="checkbox" name="aparencia"/>
-								<input type="checkbox" name="aparencia"/>
-								<input type="checkbox" name="aparencia"/>																			
-								<div class="info-adicional invisivel fadeOut">																						
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="aparenciaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-								</div>																			
-							</div>							
-						</div>
-						<div class="categoria">
-							<div class="titulo-categoria">
-								<h2>Mentais</h2>
-							</div>							
-							<div id="percepcao" class="info-categoria">
-								<label for="percepcao">Percepção</label>								
-								<input type="checkbox" name="percepcao"/>
-								<input type="checkbox" name="percepcao"/>
-								<input type="checkbox" name="percepcao"/>
-								<input type="checkbox" name="percepcao"/>
-								<input type="checkbox" name="percepcao"/>																		
-								<div class="info-adicional invisivel fadeOut">										
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="percepcaoadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-								</div>																											
-							</div>
-							<div id="inteligencia" class="info-categoria">
-								<label for="inteligencia">Inteligência</label>									
-								<input type="checkbox" name="inteligencia"/>
-								<input type="checkbox" name="inteligencia"/>
-								<input type="checkbox" name="inteligencia"/>
-								<input type="checkbox" name="inteligencia"/>
-								<input type="checkbox" name="inteligencia"/>																			
-								<div class="info-adicional invisivel fadeOut">																						
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="inteligenciaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-								</div>																			
-							</div>
-							<div id="raciocinio" class="info-categoria">
-								<label for="raciocinio">Raciocínio</label>									
-							    <input type="checkbox" name="raciocinio"/>
-								<input type="checkbox" name="raciocinio"/>
-								<input type="checkbox" name="raciocinio"/>
-								<input type="checkbox" name="raciocinio"/>
-								<input type="checkbox" name="raciocinio"/>																			
-								<div class="info-adicional invisivel fadeOut">																						
-									<button class="botao remover-atributo">-</button>
-									<input type="text" name="raciocinioadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
-									<button class="botao adicionar-atributo">+</button>																						
-								</div>																			
-							</div>							
-						</div>																																																							
-				</div>													
-			</form>
-		</section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de RPG</title>
+    <link rel="icon" href="img/rupee.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
 
-		<script src="js/accordion.js"></script>
-		<script src="js/score.js"></script>
-		<script src="js/attributePoints.js"></script>
-		<script src="js/bonusPoints.js"></script>	
-		<script src="js/form.js"></script>
-	</body>
+<body>
+
+    <header>
+        <div class="container"></div>
+    </header>
+
+    <section class="container">
+        <form action="server/form.php" method="post" id="form-adiciona">
+            <div class="grupo-info">
+                <input type="submit" value="OK" />
+                <input type="image" id="limpaForm" src="img/rewind.png" value="" />
+                <h2 id="titulo-form">Ficha</h2>
+                <audio id="myAudio">
+                    <source src="audio/chestopen.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+                </audio>
+                <button class="accordion" disabled>Complete a ficha e descubra o perfil do seu personagem.</button>
+                <div class="panel">
+                    <figcaption id="desc_perfil" class="invisivel fadeOut"></figcaption>
+                    <img id="perfil" class="invisivel fadeOut" src="" />
+                </div>
+            </div>
+            <div class="grupo-info">
+                <div class="titulo-sessao">
+                    <h2>Dados gerais</h2>
+                </div>
+                <div class="geral">
+                    <div class="info-geral">
+                        <label for="nome">Nome</label>
+                        <input id="nome" name="nome" type="text" placeholder="Nome do personagem" class="campo campo-medio" />
+                    </div>
+                    <div class="info-geral">
+                        <label for="sexo">Sexo</label>
+                        <select id="sexo" name="sexo" class="campo campo-medio">
+                            <option value="" selected>--</option>
+                            <option value="F">Feminino</option>
+                            <option value="M">Masculino</option>
+                            <option value="O">Sei lá</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="geral">
+                    <div class="info-geral">
+                        <label for="nascimento">Nascimento</label>
+                        <input id="nascimento" name="nascimento" type="date" placeholder="Data de nascimento do personagem" class="campo campo-medio" />
+                    </div>
+                    <div class="info-geral">
+                        <label for="comportamento">Comportamento</label>
+                        <select id="comportamento" name="comportamento" class="campo campo-medio">
+                            <option value="" selected>--</option>
+                            <option value="lawful">Lícito</option>
+                            <option value="neutral">Neutro</option>
+                            <option value="chaotic">Caótico</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="geral">
+                    <div class="info-geral">
+                        <label for="indole">Índole</label>
+                        <select id="indole" name="indole" class="campo campo-medio">
+                            <option value="" selected>--</option>
+                            <option value="good">Boa</option>
+                            <option value="neutral">Neutra</option>
+                            <option value="evil">Má</option>
+                        </select>
+                    </div>
+                    <div class="info-geral">
+                        <label for="hobby">Hobby</label>
+                        <select id="hobby" name="hobby" class="campo campo-medio">
+                            <option value="" selected>--</option>
+                            <option value="jogos">Jogos</option>
+                            <option value="comida">Comida</option>
+                            <option value="leitura">Leitura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="grupo-info">
+                <div class="titulo-sessao">
+                    <h2>Atributos</h2>
+                    <div>
+                        <label for="pontosDisponiveis">Pontos disponíveis</label>
+                        <input id="pontosDisponiveis" class="campo-redondo-medio" type="text" readonly/>
+                        <label id="avisoPontuacao" class="fadeOut" for="pontosDisponiveis"></label>
+                    </div>
+                </div>
+                <div class="categoria">
+                    <div class="titulo-categoria">
+                        <h2>Físicos</h2>
+                    </div>
+                    <div id="forca" class="info-categoria">
+                        <label for="forca">Força</label>
+                        <input type="checkbox" name="forca" value="1" />
+                        <input type="checkbox" name="forca" value="2" />
+                        <input type="checkbox" name="forca" value="3" />
+                        <input type="checkbox" name="forca" value="4" />
+                        <input type="checkbox" name="forca" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="forcaadicional" placeholder="+0" value="0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="destreza" class="info-categoria">
+                        <label for="destreza">Destreza</label>
+                        <input type="checkbox" name="destreza" value="1"/>
+                        <input type="checkbox" name="destreza" value="2"/>
+                        <input type="checkbox" name="destreza" value="3"/>
+                        <input type="checkbox" name="destreza" value="4"/>
+                        <input type="checkbox" name="destreza" value="5"/>
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="destrezaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="vigor" class="info-categoria">
+                        <label for="vigor">Vigor</label>
+                        <input type="checkbox" name="vigor" value="1" />
+                        <input type="checkbox" name="vigor" value="2" />
+                        <input type="checkbox" name="vigor" value="3" />
+                        <input type="checkbox" name="vigor" value="4" />
+                        <input type="checkbox" name="vigor" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="vigoradicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="categoria">
+                    <div class="titulo-categoria">
+                        <h2>Sociais</h2>
+                    </div>
+                    <div id="carisma" class="info-categoria">
+                        <label for="carisma">Carisma</label>
+                        <input type="checkbox" name="carisma" value="1" />
+                        <input type="checkbox" name="carisma" value="2" />
+                        <input type="checkbox" name="carisma" value="3" />
+                        <input type="checkbox" name="carisma" value="4" />
+                        <input type="checkbox" name="carisma" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="carismaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="manipulacao" class="info-categoria">
+                        <label for="manipulacao">Manipulação</label>
+                        <input type="checkbox" name="manipulacao" value="1" />
+                        <input type="checkbox" name="manipulacao" value="2" />
+                        <input type="checkbox" name="manipulacao" value="3" />
+                        <input type="checkbox" name="manipulacao" value="4" />
+                        <input type="checkbox" name="manipulacao" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="manipulacaoadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="aparencia" class="info-categoria">
+                        <label for="aparencia">Aparência</label>
+                        <input type="checkbox" name="aparencia" value="1" />
+                        <input type="checkbox" name="aparencia" value="2" />
+                        <input type="checkbox" name="aparencia" value="3" />
+                        <input type="checkbox" name="aparencia" value="4" />
+                        <input type="checkbox" name="aparencia" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="aparenciaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="categoria">
+                    <div class="titulo-categoria">
+                        <h2>Mentais</h2>
+                    </div>
+                    <div id="percepcao" class="info-categoria">
+                        <label for="percepcao">Percepção</label>
+                        <input type="checkbox" name="percepcao" value="1" />
+                        <input type="checkbox" name="percepcao" value="2" />
+                        <input type="checkbox" name="percepcao" value="3" />
+                        <input type="checkbox" name="percepcao" value="4" />
+                        <input type="checkbox" name="percepcao" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="percepcaoadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="inteligencia" class="info-categoria">
+                        <label for="inteligencia">Inteligência</label>
+                        <input type="checkbox" name="inteligencia" value="1" />
+                        <input type="checkbox" name="inteligencia" value="2" />
+                        <input type="checkbox" name="inteligencia" value="3" />
+                        <input type="checkbox" name="inteligencia" value="4" />
+                        <input type="checkbox" name="inteligencia" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="inteligenciaadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                    <div id="raciocinio" class="info-categoria">
+                        <label for="raciocinio">Raciocínio</label>
+                        <input type="checkbox" name="raciocinio" value="1" />
+                        <input type="checkbox" name="raciocinio" value="2" />
+                        <input type="checkbox" name="raciocinio" value="3" />
+                        <input type="checkbox" name="raciocinio" value="4" />
+                        <input type="checkbox" name="raciocinio" value="5" />
+                        <div class="info-adicional invisivel fadeOut">
+                            <button class="botao remover-atributo">-</button>
+                            <input type="text" name="raciocinioadicional" placeholder="+0" class="campo-redondo adicional" readonly/>
+                            <button class="botao adicionar-atributo">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <script src="js/accordion.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/attributePoints.js"></script>
+    <script src="js/bonusPoints.js"></script>
+    <script src="js/form.js"></script>
+</body>
+
 </html>
