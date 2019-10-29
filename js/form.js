@@ -88,22 +88,17 @@ function montaForm(formulario){
 };
 
 function enviaForm(method, action, data){
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, action, true);
-    xhr.setRequestHeader('Content-Type', 'charset=UTF-8');
-
-    xhr.send(JSON.stringify(data));
-
-    xhr.onload = function (){
-        let personagem = JSON.parse(xhr.response);
-
+    fetch(action, {
+        headers: {'Content-type' : 'application/json'},
+        method: method,
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(personagem => {
         abrirSanfona();
-
-        let audioPerfil = document.querySelector("audio");
-        audioPerfil.play();       
-
-        setTimeout(function (){ mostrarPerfil(personagem["imagem"], personagem["perfil"]) }, 4750);
-  };  
+        document.querySelector("audio").play();
+        setTimeout(() => mostrarPerfil(personagem["imagem"], personagem["perfil"]), 4750);        
+    }); 
 }
 
 // --------------------------------------------------------------------------------------------------------------
