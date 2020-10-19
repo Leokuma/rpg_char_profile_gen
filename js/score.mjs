@@ -27,7 +27,7 @@ function atualizaPontosDisponiveis(pontosDisponiveis, pontuacaoValida){
     }
 }
 
-function criarPontuacao(limite) {
+export function criarPontuacao(limite) {
     let _limite = limite;
     let _pontos = 0;
     atualizaPontosDisponiveis(limite, true);
@@ -69,5 +69,3 @@ function criarPontuacao(limite) {
       
     };
 }
-
-const pontuacaoAtributos = criarPontuacao(20);

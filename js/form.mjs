@@ -1,23 +1,10 @@
+import {esconderPontosAdicionais} from './bonusPoints.mjs';
+import {abrirSanfona, fecharSanfona, mostrarPerfil, esconderPerfil} from './accordion.mjs';
+
 let formulario = document.querySelector("#form-adiciona");
 let botaoEnviaFormulario = document.querySelector("input[type='submit']");
 
-for (let i = 0; i < formulario.length; ++i) {
-    formulario[i].addEventListener("change",function(){
-        this.classList.remove("pontuacaoInvalida");
-    });
-}
-
-formulario.onsubmit = function (event){
-    event.preventDefault();
-
-    if (validaForm(this)) {
-        let dadosForm = montaForm(this);
-        enviaForm(this.method, this.action, dadosForm);
-        botaoEnviaFormulario.disabled = true;
-    }  
-};
-
-function validaForm(formulario){
+function validaForm(pontuacaoAtributos, formulario){
     let temErros = false;
 
     temErros = !(pontuacaoAtributos.verificarPontosUtilizados());
@@ -93,34 +80,56 @@ function enviaForm(method, action, data){
         method: method,
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(personagem => {
-        abrirSanfona();
-        document.querySelector("audio").play();
-        setTimeout(() => mostrarPerfil(personagem["imagem"], personagem["perfil"]), 4750);        
-    }); 
+    .then(res => console.log(res.body));
+    // .then(res => res.json())
+    // .then(personagem => {
+    //     abrirSanfona();
+    //     document.querySelector("audio").play();
+    //     setTimeout(() => mostrarPerfil(personagem["imagem"], personagem["perfil"]), 4750);        
+    // }); 
+}
+
+export function prepararEnvioDoFormulario(pontuacaoAtributos) {
+    for (let i = 0; i < formulario.length; ++i) {
+        formulario[i].addEventListener("change",function(){
+            this.classList.remove("pontuacaoInvalida");
+        });
+    }
+    
+    formulario.onsubmit = function (event){
+        event.preventDefault();
+    
+        if (validaForm(pontuacaoAtributos, this)) {
+            let dadosForm = montaForm(this);
+            console.log(dadosForm);
+            enviaForm(this.method, this.action, dadosForm);
+            botaoEnviaFormulario.disabled = true;
+        }  
+    };
 }
 
 // --------------------------------------------------------------------------------------------------------------
 
-let botaoLimpaForm = document.querySelector("#limpaForm");
+export function prepararLimpezaDoFormulario(pontuacaoAtributos) {
+    let botaoLimpaForm = document.querySelector("#limpaForm");
 
-botaoLimpaForm.addEventListener("click",function(){
-    event.preventDefault(); 
-
-    formulario.reset();
-
-    for (let i = 0; i < formulario.length; ++i) {
-        formulario[i].classList.remove("pontuacaoInvalida");
-    }
-
-    esconderPontosAdicionais(); 
-
-    pontuacaoAtributos.reiniciarPontuacao();
-
-    fecharSanfona();
-
-    esconderPerfil();    
+    botaoLimpaForm.addEventListener("click",function(){
+        event.preventDefault(); 
     
-    botaoEnviaFormulario.disabled = false;
-});
+        formulario.reset();
+    
+        for (let i = 0; i < formulario.length; ++i) {
+            formulario[i].classList.remove("pontuacaoInvalida");
+        }
+    
+        esconderPontosAdicionais(); 
+    
+        pontuacaoAtributos.reiniciarPontuacao();
+    
+        fecharSanfona();
+    
+        esconderPerfil();    
+        
+        botaoEnviaFormulario.disabled = false;
+    });
+}

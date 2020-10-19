@@ -1,15 +1,18 @@
 let acc = document.querySelector(".accordion");
 
-acc.addEventListener("click", function(event) {
-  event.preventDefault();
-  this.classList.toggle("active");
-  let panel = this.nextElementSibling;
-  if (panel.style.maxHeight){
-    panel.style.maxHeight = null;
-  } else {
-    panel.style.maxHeight = panel.scrollHeight + "px";
-  } 
-});
+export function prepararPainelDoPerfil() {
+  acc.addEventListener("click", function(event) {
+    event.preventDefault();
+    this.classList.toggle("active");
+    let panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+
 
 function moverSanfona(mensagem){
   acc.disabled = false;
@@ -18,7 +21,7 @@ function moverSanfona(mensagem){
   acc.disabled = true;  
 }
 
-function abrirSanfona(){
+export function abrirSanfona(){
   if(!acc.classList.contains("active")){
     acc.nextElementSibling.classList.remove("fechaSanfona");
     acc.nextElementSibling.classList.add("abreSanfona");
@@ -27,7 +30,7 @@ function abrirSanfona(){
     
 }
 
-function fecharSanfona(){
+export function fecharSanfona(){
   if(acc.classList.contains("active")){
     acc.nextElementSibling.classList.remove("abreSanfona");
     acc.nextElementSibling.classList.add("fechaSanfona");    
@@ -40,7 +43,7 @@ function fecharSanfona(){
 let imagemPerfil = document.querySelector("#perfil");
 let descricaoPerfil = document.querySelector("#desc_perfil");
 
-function mostrarPerfil(caminhoImagem, textoPerfil){      
+export function mostrarPerfil(caminhoImagem, textoPerfil){      
   imagemPerfil.setAttribute("src", caminhoImagem);
   imagemPerfil.classList.remove("fadeOut");
   imagemPerfil.classList.remove("invisivel");
@@ -52,7 +55,7 @@ function mostrarPerfil(caminhoImagem, textoPerfil){
   descricaoPerfil.classList.add("slowFadeIn");    
 };
 
-function esconderPerfil(){       
+export function esconderPerfil(){       
   imagemPerfil.setAttribute("src", "");
   imagemPerfil.classList.remove("slowFadeIn");
   imagemPerfil.classList.add("invisivel");
