@@ -9,6 +9,10 @@ prepararComponentesDePontuacao(pontuacaoAtributos);
 
 prepararComponentesDePontosBonus(pontuacaoAtributos);
 
-prepararEnvioDoFormulario(pontuacaoAtributos);
+let formulario = document.querySelector("#form-adiciona");
 
-prepararLimpezaDoFormulario(pontuacaoAtributos);
+let botaoEnviaFormulario = document.querySelector("input[type='submit']");
+
+prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos);
+
+prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos);

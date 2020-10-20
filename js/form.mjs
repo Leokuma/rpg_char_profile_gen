@@ -1,9 +1,6 @@
 import {esconderPontosAdicionais} from './bonusPoints.mjs';
 import {abrirSanfona, fecharSanfona, mostrarPerfil, esconderPerfil} from './accordion.mjs';
 
-let formulario = document.querySelector("#form-adiciona");
-let botaoEnviaFormulario = document.querySelector("input[type='submit']");
-
 function validaForm(pontuacaoAtributos, formulario){
     let temErros = false;
 
@@ -80,16 +77,15 @@ function enviaForm(method, action, data){
         method: method,
         body: JSON.stringify(data)
     })
-    .then(res => console.log(res.body));
-    // .then(res => res.json())
-    // .then(personagem => {
-    //     abrirSanfona();
-    //     document.querySelector("audio").play();
-    //     setTimeout(() => mostrarPerfil(personagem["imagem"], personagem["perfil"]), 4750);        
-    // }); 
+    .then(res => res.json())
+    .then(personagem => {
+        abrirSanfona();
+        document.querySelector("audio").play();
+        setTimeout(() => mostrarPerfil(personagem["imagem"], personagem["perfil"]), 4750);        
+    }); 
 }
 
-export function prepararEnvioDoFormulario(pontuacaoAtributos) {
+export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos) {
     for (let i = 0; i < formulario.length; ++i) {
         formulario[i].addEventListener("change",function(){
             this.classList.remove("pontuacaoInvalida");
@@ -108,12 +104,10 @@ export function prepararEnvioDoFormulario(pontuacaoAtributos) {
     };
 }
 
-// --------------------------------------------------------------------------------------------------------------
-
-export function prepararLimpezaDoFormulario(pontuacaoAtributos) {
+export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos) {
     let botaoLimpaForm = document.querySelector("#limpaForm");
 
-    botaoLimpaForm.addEventListener("click",function(){
+    botaoLimpaForm.addEventListener("click",function(event){
         event.preventDefault(); 
     
         formulario.reset();
