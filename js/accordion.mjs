@@ -1,21 +1,18 @@
 function atualizarSanfona(mensagem){
-  let acc = document.querySelector(".accordion");
+  const acc = document.querySelector(".accordion");
   acc.disabled = false;
   acc.textContent = mensagem;
   
   acc.classList.toggle("active");
-  let panel = acc.nextElementSibling;
-  if (panel.style.maxHeight){
-    panel.style.maxHeight = null;
-  } else {
-    panel.style.maxHeight = panel.scrollHeight + "px";
-  }
+
+  const panel = acc.nextElementSibling;
+  panel.style.maxHeight = (panel.style.maxHeight ? null : panel.scrollHeight + "px");
 
   acc.disabled = true;  
 }
 
 export function abrirSanfona(){
-  let acc = document.querySelector(".accordion");
+  const acc = document.querySelector(".accordion");
   if(!acc.classList.contains("active")){
     acc.nextElementSibling.classList.remove("fechaSanfona");
     acc.nextElementSibling.classList.add("abreSanfona");
@@ -25,7 +22,7 @@ export function abrirSanfona(){
 }
 
 export function fecharSanfona(){
-  let acc = document.querySelector(".accordion");
+  const acc = document.querySelector(".accordion");
   if(acc.classList.contains("active")){
     acc.nextElementSibling.classList.remove("abreSanfona");
     acc.nextElementSibling.classList.add("fechaSanfona");    
@@ -36,31 +33,27 @@ export function fecharSanfona(){
 // --------------------------------------------------------------------------------------------------------------
 
 export function mostrarPerfil(caminhoImagem, textoPerfil){
-  let imagemPerfil = document.querySelector("#perfil");
-  let descricaoPerfil = document.querySelector("#desc_perfil");  
+  const imagemPerfil = document.querySelector("#perfil");
+  const descricaoPerfil = document.querySelector("#desc_perfil");  
   
   imagemPerfil.setAttribute("src", caminhoImagem);
-  imagemPerfil.classList.remove("fadeOut");
-  imagemPerfil.classList.remove("invisivel");
+  imagemPerfil.classList.remove("fadeOut", "invisivel");
   imagemPerfil.classList.add("slowFadeIn"); 
   
   descricaoPerfil.textContent = textoPerfil;        
-  descricaoPerfil.classList.remove("fadeOut");
-  descricaoPerfil.classList.remove("invisivel");
+  descricaoPerfil.classList.remove("fadeOut", "invisivel");
   descricaoPerfil.classList.add("slowFadeIn");    
 };
 
 export function esconderPerfil(){  
-  let imagemPerfil = document.querySelector("#perfil");
-  let descricaoPerfil = document.querySelector("#desc_perfil");  
+  const imagemPerfil = document.querySelector("#perfil");
+  const descricaoPerfil = document.querySelector("#desc_perfil");  
   
   imagemPerfil.setAttribute("src", "");
   imagemPerfil.classList.remove("slowFadeIn");
-  imagemPerfil.classList.add("invisivel");
-  imagemPerfil.classList.add("fadeOut");
+  imagemPerfil.classList.add("invisivel", "fadeOut");
       
   descricaoPerfil.textContent = ""; 
   descricaoPerfil.classList.remove("slowFadeIn");       
-  descricaoPerfil.classList.add("invisivel");
-  descricaoPerfil.classList.add("fadeOut");   
+  descricaoPerfil.classList.add("invisivel", "fadeOut");
 }
