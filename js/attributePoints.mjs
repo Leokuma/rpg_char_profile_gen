@@ -3,7 +3,7 @@ import {verificarPontosAdicionais} from './bonusPoints.mjs';
 export function prepararComponentesDePontuacao(pontuacaoAtributos){
     document.querySelectorAll("input[type='checkbox']").forEach(function(checkbox){   
         checkbox.addEventListener("click", function(){
-            let pontuacaoIncremento
+            let pontuacaoIncremento;
             let listaCheckboxAtualSelecionados = this.parentNode.querySelectorAll("input[type='checkbox']:checked");
             let pontuacaoAtual = listaCheckboxAtualSelecionados.length + (this.checked ? - 1 : 1);
     

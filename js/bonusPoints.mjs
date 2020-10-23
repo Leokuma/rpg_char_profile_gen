@@ -47,13 +47,11 @@ export function verificarPontosAdicionais(pontuacaoAtributos, idAtributo, habili
     let campoPontoAdicional = pontoAdicional.querySelector(".adicional");
 
     if (habilitar) {
-        pontoAdicional.classList.remove("invisivel");
-        pontoAdicional.classList.remove("fadeOut");
+        pontoAdicional.classList.remove("invisivel", "fadeOut");
         pontoAdicional.classList.add("fastFadeIn");
     }
     else {
-        pontoAdicional.classList.add("fadeOut");
-        pontoAdicional.classList.add("invisivel");
+        pontoAdicional.classList.add("fadeOut", "invisivel");
         pontoAdicional.classList.remove("fastFadeIn");
         if (campoPontoAdicional.value != "")
             pontuacaoAtributos.adicionarPontos(parseInt(campoPontoAdicional.value) * -1);

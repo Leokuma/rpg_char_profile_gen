@@ -30,8 +30,6 @@ export function fecharSanfona(){
   }
 }
 
-// --------------------------------------------------------------------------------------------------------------
-
 export function mostrarPerfil(caminhoImagem, textoPerfil){
   const imagemPerfil = document.querySelector("#perfil");
   const descricaoPerfil = document.querySelector("#desc_perfil");  
