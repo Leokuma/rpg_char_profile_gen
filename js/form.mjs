@@ -1,4 +1,3 @@
-import {esconderPontosAdicionais} from './bonusPoints.mjs';
 import {abrirSanfona, fecharSanfona, mostrarPerfil, esconderPerfil} from './accordion.mjs';
 
 function validaForm(pontuacaoAtributos, formulario){
@@ -102,6 +101,13 @@ export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pont
             botaoEnviaFormulario.disabled = true;
         }  
     };
+}
+
+function esconderPontosAdicionais(){
+    document.querySelectorAll(".info-adicional").forEach(function(pontoAdicional){
+        pontoAdicional.classList.remove("fastFadeIn");
+        pontoAdicional.classList.add("invisivel");
+    });
 }
 
 export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos) {

@@ -1,13 +1,10 @@
 import {criarPontuacao} from './score.mjs';
-import {prepararComponentesDePontuacao} from './attributePoints.mjs';
-import {prepararComponentesDePontosBonus} from './bonusPoints.mjs';
 import {prepararEnvioDoFormulario, prepararLimpezaDoFormulario} from './form.mjs';
+import {criarComponenteSeletorDePontos} from './seletorDePontos.mjs';
 
 let pontuacaoAtributos = criarPontuacao(20);
 
-prepararComponentesDePontuacao(pontuacaoAtributos);
-
-prepararComponentesDePontosBonus(pontuacaoAtributos);
+criarComponenteSeletorDePontos(pontuacaoAtributos);
 
 let formulario = document.querySelector("#form-adiciona");
 
