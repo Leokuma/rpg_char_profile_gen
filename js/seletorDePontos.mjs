@@ -152,10 +152,18 @@ class SeletorDePontos extends HTMLElement{
         //         this._maxPontos = novoValor;
         // }
 
-        //this._renderizar();
+        this._renderizar();
     }
 
     static get observedAttributes() { return ['atributo', 'titulo', 'pontos', 'max-pontos']; }
+
+    set pontos(novoValor){
+        this.setAttribute('pontos', novoValor);
+    }
+
+    get pontos(){
+        return this.getAttribute('pontos');
+    }
 }
 
 export function criarComponenteSeletorDePontos(pontuacaoAtributosExterno){

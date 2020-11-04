@@ -48,25 +48,26 @@ function montaForm(formulario){
     let data = {};
     for (let i = 0; i < formulario.length; ++i) {
         let input = formulario[i];
-        let pontos = document.querySelectorAll("[name='"+input.name+"']");
-        if (pontos.length > 1) {
-            let qntPontos = 0;
-            pontos.forEach(function(ponto){
-                if (ponto.checked)
-                    qntPontos++;          
-            });
-            data[input.name] = qntPontos;            
-        }
-        else
-        {
-            if(!isNaN(input.value) && input.value) {
-                data[input.name] = parseInt(input.value);                     
-            }                            
-            else {
-                data[input.name] = input.value;
-            }                
-        }
+
+        if(!isNaN(input.value) && input.value) {
+            data[input.name] = parseInt(input.value);                     
+        }                            
+        else {
+            data[input.name] = input.value;
+        } 
     }
+
+    document.querySelectorAll('seletor-pontos').forEach(function(seletorDePontos){
+        let qntdDePontos = 0;
+        
+        seletorDePontos.shadowRoot.querySelectorAll('input[type="checkbox"]').forEach(function(ponto){
+            if (ponto.checked)
+                qntdDePontos++;
+        });
+
+        data[seletorDePontos.getAttribute('atributo')] = qntdDePontos;
+    });
+
     return data;
 };
 
@@ -103,10 +104,9 @@ export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pont
     };
 }
 
-function esconderPontosAdicionais(){
-    document.querySelectorAll(".info-adicional").forEach(function(pontoAdicional){
-        pontoAdicional.classList.remove("fastFadeIn");
-        pontoAdicional.classList.add("invisivel");
+function reiniciarComponentesDePontos(){
+    document.querySelectorAll('seletor-pontos').forEach(function(seletorDePontos){
+        seletorDePontos.pontos = 0;
     });
 }
 
@@ -122,7 +122,7 @@ export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, po
             formulario[i].classList.remove("pontuacaoInvalida");
         }
     
-        esconderPontosAdicionais(); 
+        reiniciarComponentesDePontos(); 
     
         pontuacaoAtributos.reiniciarPontuacao();
     
