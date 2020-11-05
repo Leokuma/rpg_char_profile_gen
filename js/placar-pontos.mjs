@@ -28,7 +28,7 @@ class PlacarPontosDisponiveis{
       return true;
     }
     else{
-      mostrarAviso("* Distribua todos os pontos.");
+      this._mostrarAviso("* Distribua todos os pontos.");
       return false;
     }
   }  
