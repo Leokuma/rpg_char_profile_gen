@@ -1,6 +1,6 @@
-let pontuacaoAtributos;
+import {placarPontosDisponiveis} from './placar-pontos.mjs';
 
-class SeletorDePontos extends HTMLElement{
+class SeletorPontos extends HTMLElement{
     constructor() {
         super();
 
@@ -22,7 +22,7 @@ class SeletorDePontos extends HTMLElement{
             let pontuacaoNova = pontuacaoAtual + pontuacaoIncremento;
             
             //Se a nova pontuação for válida, preenche os pontos na página
-            if (pontuacaoAtributos.adicionarPontos(pontuacaoIncremento)){
+            if (placarPontosDisponiveis.adicionarPontos(pontuacaoIncremento)){
                 let listaCheckboxAtual = checkbox.parentNode.querySelectorAll("input[type='checkbox']");
                 listaCheckboxAtual.forEach(checkbox => checkbox.checked = (checkbox.value <= pontuacaoNova));
 
@@ -37,7 +37,7 @@ class SeletorDePontos extends HTMLElement{
                     pontoAdicional.classList.add("fadeOut", "invisivel");
                     pontoAdicional.classList.remove("fastFadeIn");
                     if (campoPontoAdicional.value != "")
-                        pontuacaoAtributos.adicionarPontos(parseInt(campoPontoAdicional.value) * -1);
+                        placarPontosDisponiveis.adicionarPontos(parseInt(campoPontoAdicional.value) * -1);
                 }
                 
                 campoPontoAdicional.value = "";                
@@ -57,11 +57,11 @@ class SeletorDePontos extends HTMLElement{
             event.preventDefault();       
         
             if (campoAdicional.value == "") {
-                if (pontuacaoAtributos.adicionarPontos(+1))
+                if (placarPontosDisponiveis.adicionarPontos(+1))
                     campoAdicional.value = "+1";                
             }
             else if (campoAdicional.value >= 1 && campoAdicional.value <= 4) {
-                if (pontuacaoAtributos.adicionarPontos(+1)){
+                if (placarPontosDisponiveis.adicionarPontos(+1)){
                     campoAdicional.value = parseInt(campoAdicional.value)+1;
                     campoAdicional.value = "+" + campoAdicional.value;
                 }                           
@@ -74,11 +74,11 @@ class SeletorDePontos extends HTMLElement{
             event.preventDefault();       
         
             if (campoAdicional.value == 1) {
-                if (pontuacaoAtributos.adicionarPontos(-1))
+                if (placarPontosDisponiveis.adicionarPontos(-1))
                     campoAdicional.value = "";                
             }
             else if (campoAdicional.value > 1 && campoAdicional.value <= 5) {
-                if (pontuacaoAtributos.adicionarPontos(-1)){
+                if (placarPontosDisponiveis.adicionarPontos(-1)){
                     campoAdicional.value = parseInt(campoAdicional.value)-1;
                     campoAdicional.value = "+" + campoAdicional.value; 
                 }                      
@@ -141,17 +141,6 @@ class SeletorDePontos extends HTMLElement{
     attributeChangedCallback(nome, antigoValor, novoValor) {
         console.log(nome, antigoValor, novoValor);
 
-        // switch(nome){
-        //     case 'atributo':   
-        //         this._atributo  = novoValor;           
-        //     case 'titulo':     
-        //         this._titulo    = novoValor;
-        //     case 'pontos':     
-        //         this._pontos    = novoValor;
-        //     case 'max-pontos': 
-        //         this._maxPontos = novoValor;
-        // }
-
         this._renderizar();
     }
 
@@ -166,7 +155,6 @@ class SeletorDePontos extends HTMLElement{
     }
 }
 
-export function criarComponenteSeletorDePontos(pontuacaoAtributosExterno){
-    pontuacaoAtributos = pontuacaoAtributosExterno;
-    customElements.define('seletor-pontos', SeletorDePontos);
+export function criarComponenteSeletorDePontos(){
+    customElements.define('seletor-pontos', SeletorPontos);
 }

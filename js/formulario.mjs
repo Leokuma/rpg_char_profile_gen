@@ -1,9 +1,10 @@
-import {abrirSanfona, fecharSanfona, mostrarPerfil, esconderPerfil} from './accordion.mjs';
+import {placarPontosDisponiveis} from './placar-pontos.mjs';
+import {abrirSanfona, fecharSanfona, mostrarPerfil, esconderPerfil} from './painel-perfil-personagem.mjs';
 
-function validaForm(pontuacaoAtributos, formulario){
+function validaForm(formulario){
     let temErros = false;
 
-    temErros = !(pontuacaoAtributos.verificarPontosUtilizados());
+    temErros = !(placarPontosDisponiveis.verificarPontosUtilizados());
 
     let nome = formulario.nome;
     if (nome.value == "") {
@@ -85,7 +86,7 @@ function enviaForm(method, action, data){
     }); 
 }
 
-export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos) {
+export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario) {
     for (let i = 0; i < formulario.length; ++i) {
         formulario[i].addEventListener("change",function(){
             this.classList.remove("pontuacaoInvalida");
@@ -95,7 +96,7 @@ export function prepararEnvioDoFormulario(formulario, botaoEnviaFormulario, pont
     formulario.onsubmit = function (event){
         event.preventDefault();
     
-        if (validaForm(pontuacaoAtributos, this)) {
+        if (validaForm(this)) {
             let dadosForm = montaForm(this);
             console.log(dadosForm);
             enviaForm(this.method, this.action, dadosForm);
@@ -110,7 +111,7 @@ function reiniciarComponentesDePontos(){
     });
 }
 
-export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, pontuacaoAtributos) {
+export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario) {
     let botaoLimpaForm = document.querySelector("#limpaForm");
 
     botaoLimpaForm.addEventListener("click",function(event){
@@ -124,7 +125,7 @@ export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario, po
     
         reiniciarComponentesDePontos(); 
     
-        pontuacaoAtributos.reiniciarPontuacao();
+        placarPontosDisponiveis.reiniciarPontuacao();
     
         fecharSanfona();
     
