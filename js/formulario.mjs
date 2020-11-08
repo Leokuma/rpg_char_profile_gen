@@ -46,12 +46,11 @@ function validaForm(formulario){
 }
 
 function montaForm(formulario){
-    let data = [...new FormData(formulario)].reduce((acumulador, campoValor) => {
-        acumulador[campoValor[0]] = campoValor[1];
-        return acumulador;
-    }, {});
+    let data = {};
+    
+    [...new FormData(formulario)].forEach(([campo, valor]) => data[campo] = valor);
 
-    document.querySelectorAll('seletor-pontos').forEach(function(seletorDePontos){
+    document.querySelectorAll('seletor-pontos').forEach(seletorDePontos => {
         data[seletorDePontos.getAttribute('atributo')] = seletorDePontos.shadowRoot.querySelectorAll('input[type="checkbox"]:checked').length;
     });
 
@@ -105,10 +104,8 @@ export function prepararLimpezaDoFormulario(formulario, botaoEnviaFormulario) {
     
         formulario.reset();
     
-        for (let i = 0; i < formulario.length; ++i) {
-            formulario[i].classList.remove("pontuacaoInvalida");
-        }
-    
+        [...formulario].forEach(elemento => elemento.classList.remove("pontuacaoInvalida"));
+
         reiniciarComponentesDePontos(); 
     
         placarPontosDisponiveis.reiniciarPontuacao();
