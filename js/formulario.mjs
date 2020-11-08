@@ -46,27 +46,13 @@ function validaForm(formulario){
 }
 
 function montaForm(formulario){
-    let data = {};
-    for (let i = 0; i < formulario.length; ++i) {
-        let input = formulario[i];
-
-        if(!isNaN(input.value) && input.value) {
-            data[input.name] = parseInt(input.value);                     
-        }                            
-        else {
-            data[input.name] = input.value;
-        } 
-    }
+    let data = [...new FormData(formulario)].reduce((acumulador, campoValor) => {
+        acumulador[campoValor[0]] = campoValor[1];
+        return acumulador;
+    }, {});
 
     document.querySelectorAll('seletor-pontos').forEach(function(seletorDePontos){
-        let qntdDePontos = 0;
-        
-        seletorDePontos.shadowRoot.querySelectorAll('input[type="checkbox"]').forEach(function(ponto){
-            if (ponto.checked)
-                qntdDePontos++;
-        });
-
-        data[seletorDePontos.getAttribute('atributo')] = qntdDePontos;
+        data[seletorDePontos.getAttribute('atributo')] = seletorDePontos.shadowRoot.querySelectorAll('input[type="checkbox"]:checked').length;
     });
 
     return data;
